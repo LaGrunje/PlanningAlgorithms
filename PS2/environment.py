@@ -117,7 +117,7 @@ class ManipulatorEnv:
                 #     return False
         return False
 
-    def render(self, plt_show=True) -> None:
+    def render(self, plt_show=True):
         """
         Displays current configuration.
         :param plt_show: whether to call plt.show() or not
@@ -134,6 +134,23 @@ class ManipulatorEnv:
         plt.axis('equal')
         if plt_show:
             plt.show()
+        return plt
+
+    def environment_image(self):
+        """
+        Returns image of environment
+        """
+        self._plot_segment(self._state.joints[[0, 1], :], np.array([1, 0, 0]),
+                           is_start_link=True)
+        self._plot_segment(self._state.joints[[1, 2], :], np.array([0, 1, 0]))
+        self._plot_segment(self._state.joints[[2, 3], :], np.array([0, 0, 1]))
+        self._plot_segment(self._state.joints[[3, 4], :], np.array([1, 0, 1]),
+                           is_end_link=True)
+        for obs in self._obstacles:
+            plt.gca().add_patch(
+                plt.Circle((obs[0], obs[1]), obs[2], fill=True))
+        plt.axis('equal')
+        return plt
 
     @staticmethod
     def _plot_segment(s, color_, is_start_link=False, is_end_link=False):

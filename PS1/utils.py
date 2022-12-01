@@ -45,6 +45,7 @@ def plotting_results(environment: np.ndarray, rod: np.ndarray, plan: list, save_
     @param plan: list of poses
     @param save_path: path to save the animation
     """
+    print("boo")
 
     fig = plt.figure()
     imgs = []
@@ -53,9 +54,9 @@ def plotting_results(environment: np.ndarray, rod: np.ndarray, plan: list, save_
         im = plot_enviroment(environment, rod, s)
         plot = plt.imshow(im)
         imgs.append([plot])
-
+    print(type(imgs), imgs)
     ani = animation.ArtistAnimation(fig, imgs, interval=50, blit=True)
 
     ani.save(save_path)
 
-    plt.show()
+    #plt.show()
