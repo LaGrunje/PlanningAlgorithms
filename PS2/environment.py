@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 class State:
@@ -117,7 +118,7 @@ class ManipulatorEnv:
                 #     return False
         return False
 
-    def render(self, plt_show=True):
+    def render(self, plt_show=True) -> None:
         """
         Displays current configuration.
         :param plt_show: whether to call plt.show() or not
@@ -134,7 +135,6 @@ class ManipulatorEnv:
         plt.axis('equal')
         if plt_show:
             plt.show()
-        return plt
 
     def environment_image(self):
         """
@@ -150,7 +150,9 @@ class ManipulatorEnv:
             plt.gca().add_patch(
                 plt.Circle((obs[0], obs[1]), obs[2], fill=True))
         plt.axis('equal')
-        return plt
+        return plt.gcf()
+        
+ 
 
     @staticmethod
     def _plot_segment(s, color_, is_start_link=False, is_end_link=False):
